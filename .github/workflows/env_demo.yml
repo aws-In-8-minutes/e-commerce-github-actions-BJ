@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show the env variable
-        run: echo "Hello dosto my name is ${{ env.NAME}}"
+        run: echo "Hello dosto my name is ${{ env.NAME }}"
       ## Repository secrets
       - name: Show the repository secret
-        run: echo "One of my secret is ${{secrets.BJ_SECRET1}}"
+        run: echo "One of my secret is ${{ secrets.BJ_SECRET1 }}"
     
