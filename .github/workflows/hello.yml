@@ -13,6 +13,7 @@ on:
     #workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
 
 jobs:     ## what is the workflow do
+  
   greet:   ## name of the job
     runs-on: ubuntu-latest   ## Where the job runs i.e. on which OS
 
@@ -20,4 +21,12 @@ jobs:     ## what is the workflow do
     steps:
       - name: Say hello
         run: echo "Hello Dosto"
+
+  repo-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show repository name
+        run: echo "The repository name is ${{ github.event.repository.name }}"
+
+  
   
