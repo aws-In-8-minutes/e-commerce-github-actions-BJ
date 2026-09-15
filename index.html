@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LumaShop - a simple modern ecommerce storefront">
+  <title>LumaShop — Modern Ecommerce</title>
+
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --text: #171717;
+      --muted: #6b6b6b;
+      --border: #e7e7e4;
+      --accent: #111111;
+      --sale: #e85d4a;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    /* Announcement */
+    .announcement {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: .82rem;
+      letter-spacing: .02em;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255,255,255,.94);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: -.06em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-size: .93rem;
+      color: #444;
+    }
+
+    .nav-links a:hover { color: #000; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: .2s ease;
+    }
+
+    .icon-btn:hover {
+      background: #111;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .cart-count {
+      position: absolute;
+      margin: -28px 0 0 28px;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 20px;
+      background: var(--sale);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: .65rem;
+      font-weight: 800;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 46px 0 28px;
+    }
+
+    .hero-card {
+      min-height: 500px;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.32) 52%, rgba(0,0,0,.05) 100%),
+        url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+      color: #fff;
+    }
+
+    .hero-content {
+      width: min(560px, 90%);
+      padding: 48px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .72rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      opacity: .85;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: .98;
+      letter-spacing: -.065em;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 470px;
+      color: rgba(255,255,255,.86);
+      margin-bottom: 28px;
+      font-size: 1.03rem;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      background: #fff;
+      color: #111;
+      padding: 13px 21px;
+      border-radius: 999px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0,0,0,.18);
+    }
+
+    /* Categories */
+    .section { padding: 42px 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 20px;
+      gap: 20px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: -.04em;
+    }
+
+    .section-head p { color: var(--muted); font-size: .92rem; }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .category {
+      position: relative;
+      min-height: 170px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      color: #fff;
+      display: flex;
+      align-items: end;
+      padding: 18px;
+      background-size: cover;
+      background-position: center;
+      isolation: isolate;
+    }
+
+    .category::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.7));
+      z-index: -1;
+    }
+
+    .category strong { font-size: 1.05rem; }
+
+    /* Products */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .product {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: .25s ease;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .product-image {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      position: relative;
+      background: #eee;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .45s ease;
+    }
+
+    .product:hover .product-image img { transform: scale(1.05); }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #fff;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: .68rem;
+      font-weight: 900;
+    }
+
+    .product-info { padding: 16px; }
+
+    .product-category {
+      color: #888;
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      font-weight: 800;
+    }
+
+    .product h3 {
+      font-size: 1rem;
+      margin: 5px 0 8px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .price { font-weight: 900; }
+
+    .old-price {
+      color: #999;
+      text-decoration: line-through;
+      font-size: .82rem;
+      margin-left: 5px;
+      font-weight: 500;
+    }
+
+    .add-btn {
+      border: 0;
+      background: #111;
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.15rem;
+      transition: .2s;
+    }
+
+    .add-btn:hover { transform: scale(1.08); }
+
+    /* Promo */
+    .promo {
+      margin: 20px 0 50px;
+      border-radius: 24px;
+      background: #dedbd3;
+      padding: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .promo h2 {
+      font-size: clamp(1.7rem, 4vw, 3rem);
+      letter-spacing: -.05em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .promo p { color: #555; }
+
+    .dark-btn {
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      padding: 13px 21px;
+      border-radius: 999px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background: #111;
+      color: #fff;
+      padding: 50px 0;
+    }
+
+    .newsletter-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .newsletter h2 {
+      font-size: 2rem;
+      letter-spacing: -.04em;
+    }
+
+    .newsletter p { color: #aaa; margin-top: 5px; }
+
+    .subscribe {
+      display: flex;
+      max-width: 440px;
+      width: 100%;
+      background: #fff;
+      border-radius: 999px;
+      padding: 5px;
+    }
+
+    .subscribe input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      padding: 0 15px;
+      background: transparent;
+    }
+
+    .subscribe button {
+      border: 0;
+      background: #111;
+      color: #fff;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      border-top: 1px solid #292929;
+      padding: 22px 0;
+      font-size: .82rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translate(-50%, 20px);
+      background: #111;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 999px;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s ease;
+      z-index: 100;
+      font-size: .88rem;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .categories, .products { grid-template-columns: repeat(2, 1fr); }
+      .hero-card { min-height: 450px; }
+      .newsletter-inner, .promo { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(100% - 22px, 1180px); }
+      .hero { padding-top: 20px; }
+      .hero-card { min-height: 500px; border-radius: 20px; }
+      .hero-content { padding: 28px; }
+      .hero h1 { font-size: 3rem; }
+      .categories { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .category { min-height: 135px; }
+      .products { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .product-info { padding: 12px; }
+      .old-price { display: none; }
+      .promo { padding: 28px; border-radius: 20px; }
+      .newsletter { padding: 38px 0; }
+      .footer-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="announcement">Free shipping on orders over $50 · New arrivals are here</div>
+
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#">LumaShop</a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#shop">Shop</a>
+        <a href="#categories">Categories</a>
+        <a href="#deals">Deals</a>
+        <a href="#about">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn" aria-label="Search" onclick="showToast('Search is ready for integration')">⌕</button>
+        <button class="icon-btn" aria-label="Shopping cart" onclick="showToast(`${cartCount} item(s) in your cart`)">
+          🛒
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-card">
+        <div class="hero-content">
+          <div class="eyebrow">New season · 2026 collection</div>
+          <h1>Everyday essentials, elevated.</h1>
+          <p>
+            Discover clean, modern pieces for your wardrobe and home.
+            Thoughtful design without the complicated shopping experience.
+          </p>
+          <a class="primary-btn" href="#shop">Shop collection →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="categories">
+      <div class="section-head">
+        <div>
+          <h2>Shop by category</h2>
+          <p>Find your next favorite.</p>
+        </div>
+      </div>
+
+      <div class="categories">
+        <a class="category" href="#shop"
+           style="background-image:url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=700&q=80')">
+          <strong>Fashion</strong>
+        </a>
+        <a class="category" href="#shop"
+           style="background-image:url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=700&q=80')">
+          <strong>Home</strong>
+        </a>
+        <a class="category" href="#shop"
+           style="background-image:url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80')">
+          <strong>Accessories</strong>
+        </a>
+        <a class="category" href="#shop"
+           style="background-image:url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=700&q=80')">
+          <strong>Tech</strong>
+        </a>
+      </div>
+    </section>
+
+    <section class="section container" id="shop">
+      <div class="section-head">
+        <div>
+          <h2>Featured products</h2>
+          <p>Simple picks for your everyday.</p>
+        </div>
+        <a href="#shop"><strong>View all →</strong></a>
+      </div>
+
+      <div class="products">
+        <article class="product">
+          <div class="product-image">
+            <span class="badge">BESTSELLER</span>
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85"
+                 alt="Red running sneaker" loading="lazy">
+          </div>
+          <div class="product-info">
+            <div class="product-category">Footwear</div>
+            <h3>Classic Runner</h3>
+            <div class="price-row">
+              <div class="price">$89 <span class="old-price">$110</span></div>
+              <button class="add-btn" onclick="addToCart('Classic Runner')" aria-label="Add Classic Runner to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product-image">
+            <span class="badge">NEW</span>
+            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85"
+                 alt="White cotton t-shirt" loading="lazy">
+          </div>
+          <div class="product-info">
+            <div class="product-category">Apparel</div>
+            <h3>Essential Tee</h3>
+            <div class="price-row">
+              <div class="price">$32</div>
+              <button class="add-btn" onclick="addToCart('Essential Tee')" aria-label="Add Essential Tee to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=700&q=85"
+                 alt="Leather handbag" loading="lazy">
+          </div>
+          <div class="product-info">
+            <div class="product-category">Bags</div>
+            <h3>Everyday Leather Bag</h3>
+            <div class="price-row">
+              <div class="price">$125</div>
+              <button class="add-btn" onclick="addToCart('Everyday Leather Bag')" aria-label="Add Everyday Leather Bag to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product-image">
+            <span class="badge">SALE</span>
+            <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=85"
+                 alt="Minimal wrist watch" loading="lazy">
+          </div>
+          <div class="product-info">
+            <div class="product-category">Accessories</div>
+            <h3>Minimal Watch</h3>
+            <div class="price-row">
+              <div class="price">$74 <span class="old-price">$99</span></div>
+              <button class="add-btn" onclick="addToCart('Minimal Watch')" aria-label="Add Minimal Watch to cart">+</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container" id="deals">
+      <div class="promo">
+        <div>
+          <div class="eyebrow">Limited time</div>
+          <h2>Up to 40% off<br>selected pieces.</h2>
+          <p>Refresh your essentials while the offer lasts.</p>
+        </div>
+        <a class="dark-btn" href="#shop">Shop deals →</a>
+      </div>
+    </section>
+  </main>
+
+  <section class="newsletter" id="about">
+    <div class="container newsletter-inner">
+      <div>
+        <h2>Stay in the loop.</h2>
+        <p>New products, useful updates and occasional offers.</p>
+      </div>
+      <form class="subscribe" onsubmit="subscribe(event)">
+        <input type="email" placeholder="Your email address" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 LumaShop. Demo storefront.</span>
+      <span>Product photography via Unsplash CDN.</span>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    let cartCount = 0;
+    let toastTimer;
+
+    function addToCart(productName) {
+      cartCount++;
+      document.getElementById("cartCount").textContent = cartCount;
+      showToast(`${productName} added to cart`);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function subscribe(event) {
+      event.preventDefault();
+      event.target.reset();
+      showToast("Thanks! You're subscribed.");
+    }
+  </script>
+</body>
+</html>
