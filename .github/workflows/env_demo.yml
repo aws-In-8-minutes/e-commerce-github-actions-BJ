@@ -16,5 +16,5 @@ jobs:
 
       ## Repository secrets
       - name: Show the repository secret
-        run: echo "One of my secret is ${{secrets.BJ_SECRET1}}
+        run: echo "One of my secret is ${{secrets.BJ_SECRET1}}"
     
