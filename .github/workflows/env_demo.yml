@@ -1,22 +1,16 @@
+name: Show Env variables
 
-name: Show environment variable
-
-on: 
+on:
   workflow_dispatch:
 
 env:
   NAME: Bhagyajeet
 
 jobs:
-  Show_variable:
+  show_env:
     runs-on: ubuntu-latest
     steps:
       - name: Show plain text env
         run: echo "My name is ${{ env.NAME }}"
-
-  Show_secrets: 
-     runs-on: ubuntu-latest
-     steps: 
       - name: Show Secrets
         run: echo "One fun secret is ${{ secrets.BJ_SECRET }}"
-    
