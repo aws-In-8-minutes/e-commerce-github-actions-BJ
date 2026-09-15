@@ -28,3 +28,5 @@ jobs:
       ## ENV Variable i.e repository variables
       - name: Show env variables
         run: echo "My dockerhub username is ${{ vars.DOCKERHUB_USERNAME }}"
+      - name: Show the selected env
+        run: echo "The selected env is ${{ inputs.environment }}"
