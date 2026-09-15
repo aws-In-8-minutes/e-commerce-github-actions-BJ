@@ -15,3 +15,6 @@ jobs:
      ## Secrets env
       - name: Show Secrets
         run: echo "One fun secret is ${{ secrets.BJ_SECRET }}"
+      ## ENV Variable i.e repository variables
+      - name: Show env variables
+        run: echo "My dockerhub username is ${{ vars.DOCKERHUB_USERNAME }}"
