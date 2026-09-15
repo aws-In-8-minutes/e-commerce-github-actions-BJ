@@ -2,6 +2,16 @@ name: Show environment variable
 
 on: 
   workflow_dispatch:
+    inputs:
+      environment: 
+       description: Select the Environment from the list
+       required: true
+       default: dev
+       type: choice
+       options:
+         - dev
+         - stg
+         - prd
 
 env:
   NAME: Bhagyajeet
