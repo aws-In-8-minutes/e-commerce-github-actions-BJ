@@ -11,9 +11,9 @@ jobs:
   Show_variable:
     runs-on: ubuntu-latest
     steps:
-      - name: Show the env variable
-        run: echo "Hello dosto my name is ${{ env.NAME }}"
-      ## Repository secrets
-      - name: Show the repository secret
-        run: echo "One of my secret is ${{ secrets.BJ_SECRET }}"
+      - name: Show plain text env
+        run: echo "My name is ${{ env.NAME }}"
+
+      - name: Show Secrets
+        run: echo "One fun secret is ${{ secrets.BJ_SECRET }}"
     
