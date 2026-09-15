@@ -15,5 +15,5 @@ jobs:
         run: echo "Hello dosto my name is ${{ env.NAME }}"
       ## Repository secrets
       - name: Show the repository secret
-        run: echo "One of my secret is ${{ secrets.BJ_SECRET_DUMMY }}"
+        run: echo "One of my secret is ${{ secrets.BJ_SECRET }}"
     
