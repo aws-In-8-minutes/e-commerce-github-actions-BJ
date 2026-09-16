@@ -1,0 +1,31 @@
+## GOAL - this is use to check the python code is syntatially correct or not.i
+
+name: Code linter   ## name of the workflow
+
+on:                 ## This will use when you want to run the code by yourself using button. 
+  push:
+    branches: [ main ]
+
+jobs:                        ## It will show the job name in the workflow 
+  code-linter:               ## This is the job name which will be shown in the workflow
+    runs-on: ubuntu-latest   ## This is the OS which will be used to run the job
+
+    steps:                            ## Steps are the commands which will be executed in the job
+      - name: Checkout code           ## This is the name of the step which will be shown in the workflow
+        uses: actions/checkout@v3     ## This is the action which will be used to checkout the code from the repository
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt 
+
+      - name: Code lint 
+        run: ruff check .
+
+      - name: Run tests
+        run: pytest
+
+     
