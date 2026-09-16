@@ -3,8 +3,9 @@
 name: Code linter   ## name of the workflow
 
 on:                 ## This will use when you want to run the code by yourself using button. 
-  push:
-    branches: [ main ]
+  #push:
+    #branches: [ main ]
+  workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
 
 jobs:                                           ## It will show the job name in the workflow 
   matrix:                                       ## This is the matrix which will be used to run the job in different python version
