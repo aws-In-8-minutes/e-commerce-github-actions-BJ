@@ -12,7 +12,7 @@ jobs:                                 ## It will show the job name in the workfl
   code-linter-and-test:               ## This is the job name which will be shown in the workflow
     strategy:                ## This is the strategy which will be used to run the job
       matrix:               ## This is the matrix which will be used to run the job
-        python-versions: [3.9, 3.10, 3.11]   ## This is the python version which will be used to run the job
+        python-versions: [3.12, 3.13, 3.14]   ## This is the python version which will be used to run the job
 
     runs-on: ubuntu-latest   ## This is the OS which will be used to run the job
 
