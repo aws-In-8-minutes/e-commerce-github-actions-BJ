@@ -8,7 +8,8 @@ on:                 ## This will use when you want to run the code by yourself u
 
 jobs:                                           ## It will show the job name in the workflow 
   matrix:                                       ## This is the matrix which will be used to run the job in different python version
-  python-version: [ '3.12', '3.13', '3.14' ]  ## This is the python version which will be used to run the job
+    python-versions: [ '3.12', '3.13', '3.14' ]  ## This is the python version which will be used to run the job
+  #python-version: [ '3.12', '3.13', '3.14' ]  ## This is the python version which will be used to run the job
   
 
   code-linter:               ## This is the job name which will be shown in the workflow
