@@ -22,7 +22,7 @@ jobs:                                           ## It will show the job name in 
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: ${{ matrix.python-version }}  ## This is the python version which will be used to run the job
+          python-version: ${{ matrix.python-versions}}  ## This is the python version which will be used to run the job
 
       - name: Install dependencies
         run: pip install -r requirements.txt 
