@@ -6,7 +6,11 @@ on:                 ## This will use when you want to run the code by yourself u
   push:
     branches: [ main ]
 
-jobs:                        ## It will show the job name in the workflow 
+jobs:                                           ## It will show the job name in the workflow 
+  matrix:                                       ## This is the matrix which will be used to run the job in different python version
+    python-version: [ '3.12', '3.13', '3.14' ]  ## This is the python version which will be used to run the job
+  
+
   code-linter:               ## This is the job name which will be shown in the workflow
     runs-on: ubuntu-latest   ## This is the OS which will be used to run the job
 
@@ -17,7 +21,7 @@ jobs:                        ## It will show the job name in the workflow
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.13'
+          python-version: ${{ matrix.python-version }}  ## This is the python version which will be used to run the job
 
       - name: Install dependencies
         run: pip install -r requirements.txt 
