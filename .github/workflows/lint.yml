@@ -1,0 +1,20 @@
+## GOAL - this is use to check the python code is syntatially correct or not.i
+
+name: Code linter
+
+on: 
+  push:
+    branches: [ main ]
+
+jobs: 
+  code-linter: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Code lint 
+        run: ruff check .
+
+     

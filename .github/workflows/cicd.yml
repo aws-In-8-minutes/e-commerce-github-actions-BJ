@@ -4,7 +4,8 @@
 name: CICD demo
 
 on: 
-  push: 
+  #push: 
+  workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
 
 
 jobs:

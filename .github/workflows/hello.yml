@@ -6,8 +6,9 @@ name: "Hello workflows"
 
 ## When the workflow runs i.e it tells when will the workflow runs which it automatically 
 on:    
-  push:
-    branches: [main]
+  #push:
+   # branches: [main]
+  workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
 
   #push: 
     #workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
