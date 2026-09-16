@@ -5,8 +5,8 @@ on:
   workflow_dispatch: 
 
 
-jobs:
-  docker build and push:
+jobs: 
+  docker-build-and-push:
     runs-on: ubuntu-latest
     
     steps:
