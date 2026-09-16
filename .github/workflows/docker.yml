@@ -26,4 +26,4 @@ jobs:
         uses: docker/build-push-action@v7   ## This is the action which will be used to build and push the docker image to DockerHub
         with: 
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/e-commerce-github-actions-BJ:latest   ## This is the tag which will be used to push the docker image to DockerHub
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/e-com-python:latest   ## This is the tag which will be used to push the docker image to DockerHub
