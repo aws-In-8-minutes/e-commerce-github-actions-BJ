@@ -11,7 +11,7 @@ jobs:
   
     steps:
       - name: Clone the code
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7  ## This is the action which will be used to checkout the code from the repository
 
       - name: Setup the docker
         uses: docker/setup-docker-action@v5
@@ -21,3 +21,6 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push Docker Image   
+        uses: docker/build-push-action@v7   ## This is the action which will be used to build and push the docker image to DockerHub
