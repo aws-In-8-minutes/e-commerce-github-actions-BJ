@@ -7,11 +7,11 @@ on:
   workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
 
 jobs: 
-    Building application and Deploying it:
+    Building-application-and-Deploying-it:
       runs-on: self-hosted
 
       steps:
-        - name: clone the clode
+        - name: clone the code
           uses: actions/checkout@v7
 
         - name: Docker installation
