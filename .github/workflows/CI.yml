@@ -3,17 +3,17 @@
 name: CI workflow
 
 on: 
-  push
+    push:
 
 jobs:
-  code-lint:
-    uses: ./github/workflows/lint_and_test.yml   ## This is the workflow which will be used to run the lint and test files.
+    code-lint:
+      uses: ./github/workflows/lint_and_test.yml   ## This is the workflow which will be used to run the lint and test files.
 
 
-  Docker:
-    needs: code-lint
-    secrets: inherit
-    uses: ./.github/workflows/docker.yml
+    Docker:
+      needs: code-lint
+      secrets: inherit
+      uses: ./.github/workflows/docker.yml
 
 
 
