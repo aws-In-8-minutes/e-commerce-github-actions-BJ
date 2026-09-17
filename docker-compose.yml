@@ -1,0 +1,8 @@
+
+## GOAL - this is use to check the python code is syntatially correct or not
+
+services:
+  build:
+    image: bhagyajeet/e-com-python:latest
+    ports:
+      - "8085:80"
