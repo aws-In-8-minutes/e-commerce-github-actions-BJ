@@ -8,7 +8,7 @@ on:
 
 jobs: 
   docker-build-and-push:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
   
     steps:
       - name: Clone the code
@@ -32,3 +32,4 @@ jobs:
         with: 
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/e-com-python:latest   ## This is the tag which will be used to push the docker image to DockerHub
+          load: true     ## This is the load which will be used to load the docker image to DockerHub by using the docker buildx command irrespective of the self hosted runner and system hosts.
