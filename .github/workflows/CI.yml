@@ -1,0 +1,27 @@
+# GOAL- GOal of this workflow is to run the lint and docker files one after another.
+
+name: CI workflow
+
+on: 
+  push
+
+jobs:
+  code-lint:
+    steps: 
+      name: Code-lint
+      uses: ./github/workflows/lint_and_test.yml   ## This is the workflow which will be used to run the lint and test files.
+
+
+  Docker:
+    needs: code-lint
+    secrets: inherit
+    steps:
+      name: Docker
+      uses: ./.github/workflows/docker.yml
+
+
+
+
+
+
+

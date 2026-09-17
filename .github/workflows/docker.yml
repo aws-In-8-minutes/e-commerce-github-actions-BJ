@@ -2,7 +2,8 @@
 name: Docker Build and Push
 
 on: 
-  workflow_dispatch: 
+  #workflow_dispatch: 
+  workflow_call:   ## This will use when you want to run the code by yourself using button.
 
 
 jobs: 
