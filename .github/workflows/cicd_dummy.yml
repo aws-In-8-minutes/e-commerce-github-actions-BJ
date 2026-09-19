@@ -5,8 +5,8 @@ name: CICD demo
 
 on: 
   #push: 
-  #workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
-  workflow_call:   ## This will use when you want to run the code by yourself using button.
+  workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
+  #workflow_call:   ## This will use when you want to run the code by yourself using button.
 
 
 jobs:
