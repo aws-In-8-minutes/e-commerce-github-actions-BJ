@@ -1,0 +1,49 @@
+
+# GOAL -  Dummy CI/CD pipeline for testing purpose
+
+name: CICD demo
+
+on: 
+  #push: 
+  #workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
+  workflow_call:   ## This will use when you want to run the code by yourself using button.
+
+
+jobs:
+
+## CI [Continous Intergartion]
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the code
+        run: echo "Code cloned"
+  
+  
+  build:
+    needs: code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build the code
+        run: echo "Build the code with Docker"
+  
+  
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test the code
+        run: echo "Test the code"
+
+## CD [Continous delivery ]
+
+  deploy:
+    secrets: inherit
+    needs: [code,build,test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy the application
+        run: echo "Application has been deplyed"
+
+        
+      
+

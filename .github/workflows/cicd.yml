@@ -1,48 +1,23 @@
+# GOAL- GOal of this workflow is to run the lint and docker files one after another.
 
-# GOAL -  Dummy CI/CD pipeline for testing purpose
-
-name: CICD demo
+name: CI workflow
 
 on: 
-  #push: 
-  #workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
-  workflow_call:   ## This will use when you want to run the code by yourself using button.
-
+    push:
 
 jobs:
+    code-lint:
+      uses: ./.github/workflows/lint_and_test.yml   ## This is the workflow which will be used to run the lint and test files.
 
-## CI [Continous Intergartion]
-  code:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone the code
-        run: echo "Code cloned"
-  
-  
-  build:
-    needs: code
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build the code
-        run: echo "Build the code with Docker"
-  
-  
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Test the code
-        run: echo "Test the code"
 
-## CD [Continous delivery ]
+    Docker:
+      needs: code-lint
+      secrets: inherit
+      uses: ./.github/workflows/docker.yml
 
-  deploy:
-    needs: [code,build,test]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy the application
-        run: echo "Application has been deplyed"
 
-        
-      
+
+
+
+
 
