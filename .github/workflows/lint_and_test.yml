@@ -32,7 +32,7 @@ jobs:                                 ## It will show the job name in the workfl
       - name: Code lint 
         run: ruff check .
 
-      - name: Run tests
-        run: pytest
+      - name: Run tests     ## This is the name of the step which will be shown in the workflow
+        run: pytest         ## This t
 
      
