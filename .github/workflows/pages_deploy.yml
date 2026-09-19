@@ -1,6 +1,6 @@
 
 ## GOAL - to deploy the index.html to github pages [github pages is a service which run static pages]
-
+## test
 name: Deploy Static Site
 
 ## It tell when does the workflow runs.
