@@ -1,19 +1,32 @@
 # GOAL- GOal of this workflow is to run the lint and docker files one after another.
 
-name: CI workflow
+name: CICD workflow
 
 on: 
     push:
 
 jobs:
-    code-lint:
+     ## CI continous interation
+    code:
       uses: ./.github/workflows/lint_and_test.yml   ## This is the workflow which will be used to run the lint and test files.
 
+    ## Build
 
-    Docker:
+    build:
       needs: code-lint
       secrets: inherit
       uses: ./.github/workflows/docker.yml
+
+    ## CD continous delivery
+    Deploy:
+      needs: [code, build]
+      runs-on: self-hosted
+      steps:
+        - name: clone the code
+          uses: actions/checkout@v7
+
+        - name: Deploy the application using run docker container
+          run: docker compose up -d
 
 
 
