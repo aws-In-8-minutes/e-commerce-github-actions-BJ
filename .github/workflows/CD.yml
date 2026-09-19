@@ -4,7 +4,7 @@
 name: CD workflow
 
 on: 
-  workflow_dispatch:   ## This will use when you want to run the code by yourself using button.
+  push:   ## This will use when you want to run the code by yourself using button.
 
 jobs: 
     Building-application-and-Deploying-it:
@@ -13,15 +13,6 @@ jobs:
       steps:
         - name: clone the code
           uses: actions/checkout@v7
-
-        # - name: Docker installation
-        #   uses: docker/setup-docker-action@v5
-
-        # - name: Docker login
-        #   uses: docker/login-action@v4
-        #   with: 
-        #     username: ${{ vars.DOCKERHUB_USERNAME }}
-        #     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
         - name: Deploy the application using run docker container
           run: docker compose up -d
