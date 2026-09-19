@@ -15,8 +15,8 @@ jobs:
       - name: Clone the code
         uses: actions/checkout@v7  ## This is the action which will be used to checkout the code from the repository
 
-      # - name: Setup the docker
-      #   uses: docker/setup-docker-action@v5
+      - name: Setup the docker
+        uses: docker/setup-docker-action@v5
 
       - name: Login to DockerHub        
         uses: docker/login-action@v4
