@@ -14,10 +14,10 @@ jobs:
         - name: clone the code
           uses: actions/checkout@v7
         
-        - name: Setup Docker
-          uses: docker/setup-docker-action@v5
-          with:
-            set-host: true
+        # - name: Setup Docker
+        #   uses: docker/setup-docker-action@v5
+        #   with:
+        #     set-host: true
 
         - name: Check Docker
           run: |
