@@ -4,7 +4,8 @@
 name: CD workflow
 
 on: 
-  push:   ## This will use when you want to run the code by yourself using button.
+  workflow_call:
+  # push:   ## This will use when you want to run the code by yourself using button.
 
 jobs: 
     Building-application-and-Deploying-it:
@@ -14,10 +15,10 @@ jobs:
         - name: clone the code
           uses: actions/checkout@v7
         
-        # - name: Setup Docker
-        #   uses: docker/setup-docker-action@v5
-        #   with:
-        #     set-host: true
+        - name: Setup Docker
+          uses: docker/setup-docker-action@v5
+          with:
+            set-host: true
 
         - name: Check Docker
           run: |
