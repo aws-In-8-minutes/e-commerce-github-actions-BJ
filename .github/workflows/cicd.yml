@@ -20,7 +20,10 @@ jobs:
     ## CD continous delivery
     Deploy:
       needs: [code, build]
-      uses: ./github/workflow/CD.yml
+      uses: ./.github/workflows/CD.yml
+ 
+ 
+ 
       # runs-on: self-hosted
       # steps:
       #   - name: clone the code

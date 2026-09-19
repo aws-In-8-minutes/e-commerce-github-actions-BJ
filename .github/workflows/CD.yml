@@ -13,6 +13,9 @@ jobs:
       steps:
         - name: clone the code
           uses: actions/checkout@v7
+        
+        - name: Setup the docker
+          uses: docker/setup-docker-action@v5
 
         - name: Deploy the application using run docker container
           run: docker compose up -d
