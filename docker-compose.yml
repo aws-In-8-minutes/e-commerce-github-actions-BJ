@@ -5,5 +5,5 @@ services:
   app:
     image: bhagyajeet/e-com-python:latest
     ports:
-      -"80:80"
+      - "80:80"
      
